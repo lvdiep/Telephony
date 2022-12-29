@@ -166,7 +166,7 @@ class SmsMethodCallHandler(
     } catch (e: IllegalArgumentException) {
       result.error(ILLEGAL_ARGUMENT, WRONG_METHOD_TYPE, null)
     } catch (e: RuntimeException) {
-      result.error(FAILED_FETCH, e.message, null)
+//      result.error(FAILED_FETCH, e.message, null)
     }
   }
 
@@ -370,13 +370,7 @@ class SmsMethodCallHandler(
       return@foldIndexed acc && result == PackageManager.PERMISSION_GRANTED
     }
 
-    return if (allPermissionGranted) {
-      execute(action)
-      true
-    } else {
-      onPermissionDenied(deniedPermissions)
-      false
-    }
+    return allPermissionGranted
   }
 
   private fun onPermissionDenied(deniedPermissions: List<String>) {
